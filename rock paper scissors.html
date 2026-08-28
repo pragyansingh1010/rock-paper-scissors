@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 60px;
+            background: #f2f2f2;
+        }
+
+        .game {
+            width: 400px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 8px;
+            cursor: pointer;
+        }
+
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px;
+        }
+
+        #score {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="game">
+
+        <h2>Rock Paper Scissors</h2>
+
+        <p>Choose your option:</p>
+
+        <button onclick="playGame('Rock')">Rock</button>
+        <button onclick="playGame('Paper')">Paper</button>
+        <button onclick="playGame('Scissors')">Scissors</button>
+
+        <p id="result"></p>
+
+        <p id="score">
+            You: 0 | Computer: 0
+        </p>
+
+        <button onclick="resetGame()">Reset Game</button>
+
+    </div>
+
+    <script>
+        let userScore = 0;
+        let computerScore = 0;
+
+        function playGame(userChoice) {
+            let choices = ["Rock", "Paper", "Scissors"];
+
+            let computerChoice =
+                choices[Math.floor(Math.random() * choices.length)];
+
+            let result;
+
+            if (userChoice == computerChoice) {
+                result = "It's a Draw!";
+            }
+            else if (
+                (userChoice == "Rock" && computerChoice == "Scissors") ||
+                (userChoice == "Paper" && computerChoice == "Rock") ||
+                (userChoice == "Scissors" && computerChoice == "Paper")
+            ) {
+                result = "You Win!";
+                userScore++;
+            }
+            else {
+                result = "Computer Wins!";
+                computerScore++;
+            }
+
+            document.getElementById("result").innerHTML =
+                "You chose: " + userChoice +
+                "<br>Computer chose: " + computerChoice +
+                "<br><br>" + result;
+
+            document.getElementById("score").innerHTML =
+                "You: " + userScore +
+                " | Computer: " + computerScore;
+        }
+
+        function resetGame() {
+            userScore = 0;
+            computerScore = 0;
+
+            document.getElementById("result").innerHTML = "";
+
+            document.getElementById("score").innerHTML =
+                "You: 0 | Computer: 0";
+        }
+    </script>
+
+</body>
+</html>
